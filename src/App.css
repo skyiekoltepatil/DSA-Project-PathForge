@@ -1,0 +1,59 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.workspace {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.grid-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0; /* Prevent flex overflow */
+  min-height: calc(100vh - 160px); /* Leave room for header/controls */
+}
+
+.sidebar {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 160px;
+}
+
+@media (max-width: 1200px) {
+  .workspace {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    position: static;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .grid-section {
+    height: auto;
+    min-height: 50vh;
+  }
+}

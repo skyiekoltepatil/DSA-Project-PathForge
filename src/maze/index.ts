@@ -1,0 +1,1 @@
+export { generateRecursiveBacktrackingMaze } from './recursiveBacktracking';
