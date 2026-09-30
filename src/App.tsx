@@ -21,10 +21,12 @@ import {
 } from './utils/grid';
 import { CELL_SIZE } from './utils/constants';
 import { generateRecursiveBacktrackingMaze } from './maze';
+import { MapMode } from './components/MapMode/MapMode';
 
 import './App.css';
 
 function App() {
+  const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Need to initialize with a dummy grid, will recalculate on mount
@@ -123,46 +125,52 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header />
+      <Header viewMode={viewMode} setViewMode={setViewMode} />
       
-      <Controls
-        algorithm={algorithm}
-        setAlgorithm={setAlgorithm}
-        speed={speed}
-        setSpeed={setSpeed}
-        drawMode={drawMode}
-        setDrawMode={setDrawMode}
-        status={status}
-        onStart={runAlgorithm}
-        onReset={handleReset}
-        onClearBoard={handleClearBoard}
-        onClearWalls={handleClearWalls}
-        onGenerateMaze={handleGenerateMaze}
-        onGenerateWeights={handleGenerateWeights}
-      />
+      {viewMode === 'grid' && (
+        <Controls
+          algorithm={algorithm}
+          setAlgorithm={setAlgorithm}
+          speed={speed}
+          setSpeed={setSpeed}
+          drawMode={drawMode}
+          setDrawMode={setDrawMode}
+          status={status}
+          onStart={runAlgorithm}
+          onReset={handleReset}
+          onClearBoard={handleClearBoard}
+          onClearWalls={handleClearWalls}
+          onGenerateMaze={handleGenerateMaze}
+          onGenerateWeights={handleGenerateWeights}
+        />
+      )}
 
       <main className="main-content">
         <div className="workspace">
-          <div className="grid-section" ref={containerRef}>
-            <GridComponent
-              grid={grid}
-              setGrid={setGrid}
-              startPos={startPos}
-              setStartPos={setStartPos}
-              endPos={endPos}
-              setEndPos={setEndPos}
-              status={status}
-              drawMode={drawMode}
-            />
-            <Legend />
-            <StatsPanel result={result} status={status} />
-            <ComparisonPanel
-              grid={grid}
-              startPos={startPos}
-              endPos={endPos}
-              currentResult={result}
-            />
-          </div>
+          {viewMode === 'grid' ? (
+            <div className="grid-section" ref={containerRef}>
+              <GridComponent
+                grid={grid}
+                setGrid={setGrid}
+                startPos={startPos}
+                setStartPos={setStartPos}
+                endPos={endPos}
+                setEndPos={setEndPos}
+                status={status}
+                drawMode={drawMode}
+              />
+              <Legend />
+              <StatsPanel result={result} status={status} />
+              <ComparisonPanel
+                grid={grid}
+                startPos={startPos}
+                endPos={endPos}
+                currentResult={result}
+              />
+            </div>
+          ) : (
+            <MapMode algorithm={algorithm} status={status} setStatus={setStatus} />
+          )}
           
           <aside className="sidebar">
             <AlgorithmInfo algorithm={algorithm} />

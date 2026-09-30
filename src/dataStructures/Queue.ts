@@ -5,18 +5,18 @@
 
 import { Position } from '../types';
 
-export class Queue {
-  private items: Position[];
+export class Queue<T = Position> {
+  private items: T[];
   private head: number;
   private tail: number;
 
   constructor(capacity = 2048) {
-    this.items = new Array(capacity);
+    this.items = new Array<T>(capacity);
     this.head = 0;
     this.tail = 0;
   }
 
-  enqueue(item: Position): void {
+  enqueue(item: T): void {
     // Grow if needed
     if (this.size() === this.items.length - 1) {
       this._resize();
@@ -25,7 +25,7 @@ export class Queue {
     this.tail = (this.tail + 1) % this.items.length;
   }
 
-  dequeue(): Position | undefined {
+  dequeue(): T | undefined {
     if (this.isEmpty()) return undefined;
     const item = this.items[this.head];
     this.head = (this.head + 1) % this.items.length;
@@ -42,7 +42,7 @@ export class Queue {
 
   private _resize(): void {
     const newCapacity = this.items.length * 2;
-    const newItems = new Array(newCapacity);
+    const newItems = new Array<T>(newCapacity);
     const currentSize = this.size();
     for (let i = 0; i < currentSize; i++) {
       newItems[i] = this.items[(this.head + i) % this.items.length];

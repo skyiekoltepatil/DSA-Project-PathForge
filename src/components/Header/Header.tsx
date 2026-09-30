@@ -2,7 +2,12 @@ import React from 'react';
 import { GitBranch, Route } from 'lucide-react';
 import './Header.css';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  viewMode: 'grid' | 'map';
+  setViewMode: (mode: 'grid' | 'map') => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ viewMode, setViewMode }) => {
   return (
     <header className="app-header">
       <div className="header-content">
@@ -13,16 +18,25 @@ export const Header: React.FC = () => {
             <p>Interactive Shortest Path Visualizer</p>
           </div>
         </div>
-        <a 
-          href="https://github.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="github-link"
-          title="View source on GitHub"
-        >
-          <GitBranch size={20} />
-          <span>GitHub</span>
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button 
+            className="btn-secondary" 
+            onClick={() => setViewMode(viewMode === 'grid' ? 'map' : 'grid')}
+            style={{ padding: '6px 12px', fontSize: '0.9rem' }}
+          >
+            {viewMode === 'grid' ? '🌍 Real Map Mode' : '⬛ Grid Mode'}
+          </button>
+          <a 
+            href="https://github.com" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="github-link"
+            title="View source on GitHub"
+          >
+            <GitBranch size={20} />
+            <span>GitHub</span>
+          </a>
+        </div>
       </div>
     </header>
   );

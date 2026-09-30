@@ -6,24 +6,24 @@
 
 import { Position } from '../types';
 
-interface HeapNode {
-  position: Position;
+interface HeapNode<T> {
+  item: T;
   priority: number;
 }
 
-export class MinHeap {
-  private heap: HeapNode[];
+export class MinHeap<T = Position> {
+  private heap: HeapNode<T>[];
 
   constructor() {
     this.heap = [];
   }
 
-  insert(position: Position, priority: number): void {
-    this.heap.push({ position, priority });
+  insert(item: T, priority: number): void {
+    this.heap.push({ item, priority });
     this._bubbleUp(this.heap.length - 1);
   }
 
-  extractMin(): HeapNode | undefined {
+  extractMin(): HeapNode<T> | undefined {
     if (this.heap.length === 0) return undefined;
     const min = this.heap[0];
     const last = this.heap.pop()!;
@@ -71,18 +71,18 @@ export class MinHeap {
   }
 }
 
-export class PriorityQueue {
-  private minHeap: MinHeap;
+export class PriorityQueue<T = Position> {
+  private minHeap: MinHeap<T>;
 
   constructor() {
-    this.minHeap = new MinHeap();
+    this.minHeap = new MinHeap<T>();
   }
 
-  enqueue(position: Position, priority: number): void {
-    this.minHeap.insert(position, priority);
+  enqueue(item: T, priority: number): void {
+    this.minHeap.insert(item, priority);
   }
 
-  dequeue(): { position: Position; priority: number } | undefined {
+  dequeue(): { item: T; priority: number } | undefined {
     return this.minHeap.extractMin();
   }
 

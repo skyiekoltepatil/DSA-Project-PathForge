@@ -1,0 +1,183 @@
+.map-mode-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.map-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-bg-main);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-instructions {
+  margin: 0;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.map-error {
+  color: #ef233c;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.map-notice {
+  color: #f4a261;
+  font-weight: 500;
+  font-size: 0.85rem;
+  max-width: 420px;
+}
+
+/* Spinning loader icon used in the search dropdown */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.map-stats, .map-result {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.leaflet-wrapper {
+  flex: 1;
+  min-height: calc(100vh - 200px);
+  position: relative;
+  z-index: 0;
+}
+
+.leaflet-container {
+  background-color: #0f172a !important; /* Matches --color-bg-main */
+}
+
+/* Routing Search Box UI */
+.routing-box {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  z-index: 1000;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+}
+
+.routing-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.input-group input {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.icon-start {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+}
+
+.icon-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-left: 17px;
+  margin: -4px 0;
+}
+
+.icon-dots span {
+  width: 3px;
+  height: 3px;
+  background-color: var(--color-text-muted);
+  border-radius: 50%;
+}
+
+.icon-end {
+  color: #ef233c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swap-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.swap-btn:hover {
+  color: var(--color-accent);
+}
+
+/* Route summary card (distance A -> B) */
+.route-summary {
+  position: absolute;
+  left: 50px;
+  bottom: 30px;
+  z-index: 1000;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  min-width: 160px;
+}
+
+.route-summary-distance {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.route-summary-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}

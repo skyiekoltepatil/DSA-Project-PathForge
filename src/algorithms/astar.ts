@@ -36,7 +36,7 @@ export function astar(grid: Grid, start: Position, end: Position): AlgorithmResu
   pq.enqueue(start, initialHeuristic);
 
   while (!pq.isEmpty()) {
-    const { position: current } = pq.dequeue()!;
+    const { item: current } = pq.dequeue()!;
     const key = posKey(current);
 
     // Skip if we've already processed this node optimally

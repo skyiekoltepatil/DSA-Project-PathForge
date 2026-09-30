@@ -31,7 +31,7 @@ export function dijkstra(grid: Grid, start: Position, end: Position): AlgorithmR
   pq.enqueue(start, 0);
 
   while (!pq.isEmpty()) {
-    const { position: current, priority: currentDist } = pq.dequeue()!;
+    const { item: current, priority: currentDist } = pq.dequeue()!;
     const key = posKey(current);
 
     // If we've already found a shorter path to this node, skip it
